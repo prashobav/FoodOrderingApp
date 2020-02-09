@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
- 
+
+import com.upgrad.FoodOrderingApp.api.model.LoginResponse;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerRequest;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerResponse;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
@@ -46,4 +47,79 @@ public class CustomerController {
 		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
       }
       
+	  @RequestMapping(method = RequestMethod.POST,path="/customer/login", produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+      public ResponseEntity<LoginResponse> login(final String Authorization) {
+		  
+		  final CustomerEntity customerEntity = new CustomerEntity();
+		  customerEntity.setUuid(UUID.randomUUID().toString());
+		  customerEntity.setFirstName(signupCustomerRequest.getFirstName());
+		  customerEntity.setLastName(signupCustomerRequest.getLastName());
+		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
+		  customerEntity.setPassword(signupCustomerRequest.getPassword());
+		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
+		  customerEntity.setSalt("1234abc");
+		  
+		  
+		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
+		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
+		  
+		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
+      }
+	  
+	  /*@RequestMapping(method = RequestMethod.POST,path="/customer/logout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+      public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupCustomerRequest) {
+		  
+		  final CustomerEntity customerEntity = new CustomerEntity();
+		  customerEntity.setUuid(UUID.randomUUID().toString());
+		  customerEntity.setFirstName(signupCustomerRequest.getFirstName());
+		  customerEntity.setLastName(signupCustomerRequest.getLastName());
+		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
+		  customerEntity.setPassword(signupCustomerRequest.getPassword());
+		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
+		  customerEntity.setSalt("1234abc");
+		  
+		  
+		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
+		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
+		  
+		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
+      }
+	  
+	  @RequestMapping(method = RequestMethod.POST,path="/customer", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+      public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupCustomerRequest) {
+		  
+		  final CustomerEntity customerEntity = new CustomerEntity();
+		  customerEntity.setUuid(UUID.randomUUID().toString());
+		  customerEntity.setFirstName(signupCustomerRequest.getFirstName());
+		  customerEntity.setLastName(signupCustomerRequest.getLastName());
+		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
+		  customerEntity.setPassword(signupCustomerRequest.getPassword());
+		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
+		  customerEntity.setSalt("1234abc");
+		  
+		  
+		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
+		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
+		  
+		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
+      }
+	  
+	  @RequestMapping(method = RequestMethod.POST,path="/customer/password", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+      public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupCustomerRequest) {
+		  
+		  final CustomerEntity customerEntity = new CustomerEntity();
+		  customerEntity.setUuid(UUID.randomUUID().toString());
+		  customerEntity.setFirstName(signupCustomerRequest.getFirstName());
+		  customerEntity.setLastName(signupCustomerRequest.getLastName());
+		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
+		  customerEntity.setPassword(signupCustomerRequest.getPassword());
+		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
+		  customerEntity.setSalt("1234abc");
+		  
+		  
+		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
+		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
+		  
+		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
+      }*/
 }

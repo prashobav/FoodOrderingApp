@@ -29,7 +29,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @NamedQueries(
         {
                 @NamedQuery(name = "customerByUuid", query = "select u from CustomerEntity u where u.uuid = :uuid"),
-                @NamedQuery(name = "customerByEmail", query = "select u from CustomerEntity u where u.email =:email")
+                @NamedQuery(name = "customerByContactNumber", query = "select u from CustomerEntity u where u.contactNumber =:contactNumber")
         }
 )
 public class CustomerEntity implements Serializable{
