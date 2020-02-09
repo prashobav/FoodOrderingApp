@@ -36,9 +36,9 @@ public class CustomerController {
 		  customerEntity.setLastName(signupCustomerRequest.getLastName());
 		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
 		  customerEntity.setPassword(signupCustomerRequest.getPassword());
+		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
 		  customerEntity.setSalt("1234abc");
-		  customerEntity.setCreatedAt(ZonedDateTime.now());
-		  customerEntity.setCreatedBy("api-backend");
+		  
 		  
 		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
 		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");

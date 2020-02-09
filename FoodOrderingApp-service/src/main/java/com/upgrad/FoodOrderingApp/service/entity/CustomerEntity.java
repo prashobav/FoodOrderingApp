@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
  
 @Entity
-@Table(name = "customer", schema = "postgres")
+@Table(name = "customer", schema = "public")
 @NamedQueries(
         {
                 @NamedQuery(name = "customerByUuid", query = "select u from CustomerEntity u where u.uuid = :uuid"),
@@ -44,7 +44,6 @@ public class CustomerEntity implements Serializable{
 	    private String uuid;
 
 	    @Column(name = "EMAIL")
-	    @NotNull
 	    @Size(max = 200)
 	    private String email;
 
@@ -58,31 +57,15 @@ public class CustomerEntity implements Serializable{
 	    private String firstName;
 
 	    @Column(name = "LASTNAME")
-	    @NotNull
 	    @Size(max = 200)
 	    private String lastName;
-
-	   
 
 		@Column(name = "CONTACT_NUMBER")
 	    @NotNull
 	    @Size(max = 50)
 	    private String contactNumber;
 
-	    @Column(name = "STATUS")
-	    @NotNull
-	    private int status;
-
-	    @Column(name = "FAILED_LOGIN_COUNT")
-	    @Min(0)
-	    @Max(5)
-	    private int failedLoginCount;
-
-	    @Column(name = "LAST_PASSWORD_CHANGE_AT")
-	    private ZonedDateTime lastPasswordChangeAt;
-
-	    @Column(name = "LAST_LOGIN_AT")
-	    private ZonedDateTime lastLoginAt;
+ 
 
 	    @Column(name = "SALT")
 	    @NotNull
@@ -90,25 +73,7 @@ public class CustomerEntity implements Serializable{
 	    //@ToStringExclude
 	    private String salt;
 
-	    @Version
-	    @Column(name = "VERSION", length = 19, nullable = false)
-	    private Long version;
-
-
-	    @Column(name = "CREATED_BY")
-	    @NotNull
-	    private String createdBy;
-
-
-	    @Column(name = "CREATED_AT")
-	    @NotNull
-	    private ZonedDateTime createdAt;
-
-	    @Column(name = "MODIFIED_BY")
-	    private String modifiedBy;
-
-	    @Column(name = "MODIFIED_AT")
-	    private ZonedDateTime modifiedAt;
+ 
 
 
 	    @Override
@@ -173,37 +138,8 @@ public class CustomerEntity implements Serializable{
 			this.contactNumber = contactNumber;
 		}
 
-	    public int getStatus() {
-	        return status;
-	    }
-
-	    public void setStatus(int status) {
-	        this.status = status;
-	    }
-
-	    public int getFailedLoginCount() {
-	        return failedLoginCount;
-	    }
-
-	    public void setFailedLoginCount(int failedLoginCount) {
-	        this.failedLoginCount = failedLoginCount;
-	    }
-
-	    public ZonedDateTime getLastPasswordChangeAt() {
-	        return lastPasswordChangeAt;
-	    }
-
-	    public void setLastPasswordChangeAt(ZonedDateTime lastPasswordChangeAt) {
-	        this.lastPasswordChangeAt = lastPasswordChangeAt;
-	    }
-
-	    public ZonedDateTime getLastLoginAt() {
-	        return lastLoginAt;
-	    }
-
-	    public void setLastLoginAt(ZonedDateTime lastLoginAt) {
-	        this.lastLoginAt = lastLoginAt;
-	    }
+	    
+ 
 
 	    public String getSalt() {
 	        return salt;
@@ -212,47 +148,9 @@ public class CustomerEntity implements Serializable{
 	    public void setSalt(String salt) {
 	        this.salt = salt;
 	    }
-
-	    public Long getVersion() {
-	        return version;
-	    }
-
-	    public void setVersion(Long version) {
-	        this.version = version;
-	    }
-
-	    public String getCreatedBy() {
-	        return createdBy;
-	    }
-
-	    public void setCreatedBy(String createdBy) {
-	        this.createdBy = createdBy;
-	    }
-
-	    public ZonedDateTime getCreatedAt() {
-	        return createdAt;
-	    }
-
-	    public void setCreatedAt(ZonedDateTime createdAt) {
-	        this.createdAt = createdAt;
-	    }
-
-	    public String getModifiedBy() {
-	        return modifiedBy;
-	    }
-
-	    public void setModifiedBy(String modifiedBy) {
-	        this.modifiedBy = modifiedBy;
-	    }
-
-	    public ZonedDateTime getModifiedAt() {
-	        return modifiedAt;
-	    }
-
-	    public void setModifiedAt(ZonedDateTime modifiedAt) {
-	        this.modifiedAt = modifiedAt;
-	    }
-
+ 
+	 
+ 
 	    @Override
 	    public int hashCode() {
 	        return new HashCodeBuilder().append(this).hashCode();
