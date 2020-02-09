@@ -20,3 +20,4 @@ D:\FulStack\CapstoneProject\FoodOrderingAppBackend\FoodOrderingApp-service\src\m
 D:\FulStack\CapstoneProject\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\exception\RestaurantNotFoundException.java
 D:\FulStack\CapstoneProject\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\exception\AddressNotFoundException.java
 D:\FulStack\CapstoneProject\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\exception\SignUpRestrictedException.java
+D:\FulStack\CapstoneProject\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\entity\CustomerAuthEntity.java

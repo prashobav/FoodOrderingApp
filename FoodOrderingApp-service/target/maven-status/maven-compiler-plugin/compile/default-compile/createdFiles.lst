@@ -19,4 +19,5 @@ com\upgrad\FoodOrderingApp\service\exception\AuthorizationFailedException.class
 com\upgrad\FoodOrderingApp\service\exception\AddressNotFoundException.class
 com\upgrad\FoodOrderingApp\service\exception\InvalidRatingException.class
 com\upgrad\FoodOrderingApp\service\common\UnexpectedException.class
+com\upgrad\FoodOrderingApp\service\entity\CustomerAuthEntity.class
 com\upgrad\FoodOrderingApp\service\exception\CategoryNotFoundException.class
