@@ -34,7 +34,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 )
 public class CustomerEntity implements Serializable{
 
-	 @Id
+	    @Id
 	    @Column(name = "ID")
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Integer id;

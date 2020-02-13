@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.upgrad.FoodOrderingApp.api.model.LoginResponse;
+import com.upgrad.FoodOrderingApp.api.model.LogoutResponse;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerRequest;
 import com.upgrad.FoodOrderingApp.api.model.SignupCustomerResponse;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
+import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
  
 @CrossOrigin	
 @RestController
@@ -47,47 +49,43 @@ public class CustomerController {
 		  
 		  
 		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
-		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
+		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("CUSTOMER SUCCESSFULLY REGISTERED");
 		  
 		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
       }
       
 	  
 	  
-	  @RequestMapping(method = RequestMethod.POST,path="/customer/login", produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 @RequestMapping(method = RequestMethod.POST,path="/customer/login", produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
       public ResponseEntity<LoginResponse> login(@RequestHeader("Authorization") final String Authorization) throws AuthenticationFailedException {
 		  byte[] decode = Base64.getDecoder().decode(Authorization.split("Basic ")[1]);
 		  String decodedText = new String(decode);
 		  String [] decodedArray = decodedText.split(":");
 		  CustomerAuthEntity customerAuthToken = customerService.authenticate(decodedArray[0], decodedArray[1]);
 		  CustomerEntity customer = customerAuthToken.getCustomer();
-		  LoginResponse loginResponse = new LoginResponse().id(UUID.fromString(customer.getUuid())).firstName(customer.getFirstName()).lastName(customer.getLastName())
-		  .email(customer.getEmail()).contactNumber(customer.getContactNumber());
+		  LoginResponse loginResponse = new LoginResponse().id(customer.getUuid()).
+		   firstName(customer.getFirstName()).
+		   lastName(customer.getLastName()).
+		   emailAddress(customer.getEmail()).
+		   contactNumber(customer.getContactNumber()).message("LOGGED IN SUCCESSFULLY");
+		 
 		  HttpHeaders headers = new HttpHeaders();
 		  headers.add("access-token", customerAuthToken.getAccessToken());
 		  return new ResponseEntity<LoginResponse>(loginResponse,headers,HttpStatus.OK);
       }
 	  
-	  /*@RequestMapping(method = RequestMethod.POST,path="/customer/logout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-      public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupCustomerRequest) {
-		  
-		  final CustomerEntity customerEntity = new CustomerEntity();
-		  customerEntity.setUuid(UUID.randomUUID().toString());
-		  customerEntity.setFirstName(signupCustomerRequest.getFirstName());
-		  customerEntity.setLastName(signupCustomerRequest.getLastName());
-		  customerEntity.setEmail(signupCustomerRequest.getEmailAddress());
-		  customerEntity.setPassword(signupCustomerRequest.getPassword());
-		  customerEntity.setContactNumber(signupCustomerRequest.getContactNumber());
-		  customerEntity.setSalt("1234abc");
-		  
-		  
-		  final CustomerEntity createdCustomerEntity =  customerService.SignupCustomer(customerEntity);
-		  SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid()).status("REGISTERED");
-		  
-		  return new ResponseEntity<SignupCustomerResponse>(customerResponse,HttpStatus.CREATED);
-      }
+	 @RequestMapping(method= RequestMethod.POST, path="/customer/logout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	    public ResponseEntity<LogoutResponse>logout(@RequestHeader("authorization") final String authorization)
+	            throws AuthorizationFailedException { 
+	        String[] basicToken = authorization.split("Basic "); 
+	        final CustomerAuthEntity customerAuthEntity = customerService.logout(basicToken[1]); 
+	        CustomerEntity customerEntity = customerAuthEntity.getCustomer(); 
+	        LogoutResponse logoutResponse = new LogoutResponse().id(customerEntity.getUuid()).message("LOGGED OUT SUCCESSFULLY"); 
+	        return new ResponseEntity<LogoutResponse>(logoutResponse, HttpStatus.OK);
+
+	    }
 	  
-	  @RequestMapping(method = RequestMethod.POST,path="/customer", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 /* @RequestMapping(method = RequestMethod.POST,path="/customer", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
       public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupCustomerRequest) {
 		  
 		  final CustomerEntity customerEntity = new CustomerEntity();
