@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * ItemQuantity
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-02-13T15:40:43.181+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-02-14T17:12:07.450+05:30")
 
 public class ItemQuantity   {
   @JsonProperty("item_id")
