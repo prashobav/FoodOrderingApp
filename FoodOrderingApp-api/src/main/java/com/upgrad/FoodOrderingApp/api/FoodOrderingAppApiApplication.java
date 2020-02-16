@@ -1,10 +1,11 @@
 package com.upgrad.FoodOrderingApp.api;
 
 
-import com.upgrad.FoodOrderingApp.service.ServiceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+
+import com.upgrad.FoodOrderingApp.service.ServiceConfiguration;
 
 /**
  * A Configuration class that can declare one or more @Bean methods and trigger auto-configuration and component scanning.
