@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.UUID;
-
-import org.springframework.context.annotation.Lazy;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,8 +15,8 @@ import javax.validation.constraints.*;
  * ItemList
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-02-15T12:58:26.036+05:30")
- 
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-02-18T18:57:27.828+05:30")
+
 public class ItemList   {
   @JsonProperty("id")
   private UUID id = null;

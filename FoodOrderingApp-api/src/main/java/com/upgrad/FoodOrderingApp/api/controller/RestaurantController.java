@@ -25,6 +25,7 @@ import com.upgrad.FoodOrderingApp.service.exception.InvalidRatingException;
 import com.upgrad.FoodOrderingApp.service.exception.RestaurantNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
  
+@ComponentScan
 @RestController
 @CrossOrigin
 @RequestMapping("/") 
@@ -281,7 +283,7 @@ public class RestaurantController {
      * @throws RestaurantNotFoundException - When given restaurant id field is empty
      */
      
-    @RequestMapping(method = RequestMethod.GET, path = "/restaurant/{restaurant_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   /* @RequestMapping(method = RequestMethod.GET, path = "/restaurant/{restaurant_id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity getRestaurantByUUId(@PathVariable String restaurant_id) throws RestaurantNotFoundException {
 
         // Throw exception if path variable(restaurant_id) is empty
