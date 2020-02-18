@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * InvalidRatingException is thrown when customer tries to give a rating below 1 or above 5.
- */
+ 
 public class InvalidRatingException extends Exception {
     private final String code;
     private final String errorMessage;

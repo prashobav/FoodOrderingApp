@@ -69,19 +69,19 @@ public class CustomerService {
 	 @Transactional
 	    public CustomerAuthEntity logout (final String authorizationToken) throws AuthorizationFailedException {
 
-	        // Gets the CustomerAuthEntity with the provided authorizationToken
+	         
 	        CustomerAuthEntity CustomerAuthEntity = customerDao.getCustomerAuthToken(authorizationToken);
 
-	        // Gets the current time
+	        
 	        final ZonedDateTime now = ZonedDateTime.now();
 
-	        // Validates the provided access token
+	        
 	        validateAccessToken(authorizationToken);
 
-	        // Sets the logout time to now
+	        
 	        CustomerAuthEntity.setLogoutAt(now);
 
-	        // Calls customerDao to update the customer logout details in the database
+	        
 	        customerDao.updateCustomerAuth(CustomerAuthEntity);
 	        return CustomerAuthEntity;
 	    }
@@ -89,19 +89,19 @@ public class CustomerService {
 	    @Transactional
 	    public void validateAccessToken(final String authorizationToken) throws AuthorizationFailedException{
 
-	        //get the customerAuthToken details from customerDao
+	        
 	        CustomerAuthEntity CustomerAuthEntity = customerDao.getCustomerAuthToken(authorizationToken);
 
-	        // Gets the current time
+	        
 	        final ZonedDateTime now = ZonedDateTime.now();
 
-	        // Throw AuthorizationFailedException if the customer is not authorized
+	         
 	        if (CustomerAuthEntity == null) {
 	            throw new AuthorizationFailedException("ATHR-001", "Customer is not Logged in.");
-	        // Throw AuthorizationFailedException if the customer is logged out
+	         
 	        } else if (CustomerAuthEntity.getLogoutAt() != null) {
 	            throw new AuthorizationFailedException("ATHR-002", "Customer is logged out. Log in again to access this endpoint.");
-	        // Throw AuthorizationFailedException if the customer session is expired
+	         
 	        } else if (now.isAfter(CustomerAuthEntity.getExpiresAt()) ) {
 	            throw new AuthorizationFailedException("ATHR-003", "Your session is expired. Log in again to access this endpoint.");
 	        }	
@@ -118,25 +118,25 @@ public class CustomerService {
 	    public CustomerEntity updateCustomer (CustomerEntity updatedCustomerEntity, final String authorizationToken)
 	            throws AuthorizationFailedException, UpdateCustomerException {
 
-	        //get the customerAuthToken details from customerDao
+	      
 	        CustomerAuthEntity customerAuthEntity = customerDao.getCustomerAuthToken(authorizationToken);
 
-	        // Validates the provided access token
+	       
 	        validateAccessToken(authorizationToken);
 
-	        //get the customer Details using the customerUuid
+	        
 	        CustomerEntity customerEntity =  customerDao.getCustomerByUuid(customerAuthEntity.getUuid());
 
-	        // Throws UpdateCustomerException if firstname is updated to null
+	         
 	        if (updatedCustomerEntity.getFirstName() == null) {
 	            throw new UpdateCustomerException("UCR-002", "First name field should not be empty");
 	        }
 
-	        // Now set the updated firstName and lastName and attach it to the customerEntity
+	        
 	        customerEntity.setFirstName(updatedCustomerEntity.getFirstName());
 	        customerEntity.setLastName(updatedCustomerEntity.getLastName());
 
-	        //called customerDao to merge the content and update in the database
+	         
 	        customerDao.updateCustomer(customerEntity);
 	        return customerEntity;
 	    }
@@ -145,50 +145,41 @@ public class CustomerService {
 	    public CustomerEntity updateCustomerPassword (final String oldPassword, final String newPassword, final String authorizationToken)
 	            throws AuthorizationFailedException, UpdateCustomerException {
 
-	        // Gets the current time
+	        
 	        final ZonedDateTime now = ZonedDateTime.now();
 
-	        //get the customerAuthToken details from customerDao
+	         
 	        CustomerAuthEntity customerAuthTokenEntity = customerDao.getCustomerAuthToken(authorizationToken);
 
-	        // Validates the provided access token
+	        
 	        validateAccessToken(authorizationToken);
 
-	        //get the customer Details using the customerUuid
+	        
 	        CustomerEntity customerEntity =  customerDao.getCustomerByUuid(customerAuthTokenEntity.getUuid());
 
-	        // Throws UpdateCustomerException if either old password or new password is null
+	       
 	        if (oldPassword == null || newPassword ==  null) {
 	            throw new UpdateCustomerException("UCR-003", "No field should be empty");
 	        }
 
-	        // Since the password stored in the database is encrypted, so we also encrypt the password entered by the customer
-	        // using the Salt attribute in the database
-	        // Call the encrypt() method in PasswordCryptographyProvider class for CryptographyProvider object
-	        final String encryptedPassword = cryptographyProvider.encrypt(oldPassword, customerEntity.getSalt());
+	         final String encryptedPassword = cryptographyProvider.encrypt(oldPassword, customerEntity.getSalt());
 
-	        // Throws UpdateCustomerException if old password provided is incorrect
-	        if(!encryptedPassword.equals(customerEntity.getPassword())) {
+	         if(!encryptedPassword.equals(customerEntity.getPassword())) {
 	            throw new UpdateCustomerException("UCR-004", "Incorrect old password!");
-	        // Throws UpdateCustomerException if password length is less than 8 characters
-	        // or if it does not contain at least one digit or if it does not contain at least one uppercase character
-	        // or if it does not contain any of the mentioned special characters
-	        } else if (newPassword.length() < 8
+	         } else if (newPassword.length() < 8
 	                || !newPassword.matches(".*[0-9]{1,}.*")
 	                || !newPassword.matches(".*[A-Z]{1,}.*")
 	                || !newPassword.matches(".*[#@$%&*!^]{1,}.*")) {
 	            throw new UpdateCustomerException("UCR-001", "Weak password!");
 	        }
 
-	        // Now set the updated password and attach it to the customerEntity
-	        customerEntity.setPassword(newPassword);
-
-	        // Encryption of new password
+	         customerEntity.setPassword(newPassword);
+ 
 	        String[] encryptedText = cryptographyProvider.encrypt(customerEntity.getPassword());
 	        customerEntity.setSalt(encryptedText[0]);
 	        customerEntity.setPassword(encryptedText[1]);
 
-	        // Calls customerDao to merge the content and update in the database
+	       
 	        customerDao.updateCustomer(customerEntity);
 	        return customerEntity;
 	    }

@@ -81,9 +81,7 @@ public class AddressService {
 	            throw new SaveAddressException("SAR-001", "No field can be empty.");
 	        }
 
-	        /*if (stateDao.getStateByUuid(addressEntity.getState().getUuid()) == null) {
-	            throw new AddressNotFoundException("ANF-002", "No state by this id");
-	        }*/
+	        
 
 	        if (stateDao.getStateById(addressEntity.getState().getId()) == null) {
 	            throw new AddressNotFoundException("ANF-002", "No state by this id.");
@@ -95,10 +93,10 @@ public class AddressService {
 
 	        addressEntity = addressDao.createAddress(addressEntity);
 
-	        //get the customerAuthToken details from customerDao
+	        
 	        CustomerAuthEntity customerAuthTokenEntity = customerDao.getCustomerAuthToken(bearerToken);
 
-	        // Save the customer address
+	        
 	        final CustomerEntity customerEntity = customerDao.getCustomerByUuid(customerAuthTokenEntity.getUuid());
 	        final CustomerAddressEntity customerAddressEntity = new CustomerAddressEntity();
 
@@ -137,14 +135,14 @@ public class AddressService {
 
 	        customerService.validateAccessToken(bearerToken);
 
-	        //get the customerAuthToken details from customerDao
+	      
 	        CustomerAuthEntity customerAuthTokenEntity = customerDao.getCustomerAuthToken(bearerToken);
 
 	        return customerAddressDao.getAddressForCustomerByUuid(customerAuthTokenEntity.getCustomer().getUuid());
 	    }
 
 	    public List<StateEntity> getAllStates() throws AuthorizationFailedException {
-	        //customerAdminBusinessService.validateAccessToken(bearerToken);
+	        
 	        return stateDao.getAllStates();
 	    }
 }

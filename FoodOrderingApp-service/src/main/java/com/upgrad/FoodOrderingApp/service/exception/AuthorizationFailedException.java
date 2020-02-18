@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * AuthorizationFailedException is thrown when customer is not authorized to access that endpoint.
- */
+ 
 public class AuthorizationFailedException extends Exception {
     private final String code;
     private final String errorMessage;

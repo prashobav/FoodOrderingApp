@@ -40,14 +40,6 @@ public class AddressDao {
 	    public AddressEntity deleteAddressByUuid(final AddressEntity addressEntity) {
 	        entityManager.remove(addressEntity);
 	        return addressEntity;
-	        /*try {
-	            AddressEntity ae = entityManager.createNamedQuery("deleteAddressByUuid", AddressEntity.class).setParameter("uuid", addressUuid)
-	                    .getSingleResult();
-	            ae.setActive(0);
-	            entityManager.persist(ae);
-	            return ae;
-	        } catch (NoResultException nre) {
-	            return null;
-	        }*/
+	         
 	    }
 }

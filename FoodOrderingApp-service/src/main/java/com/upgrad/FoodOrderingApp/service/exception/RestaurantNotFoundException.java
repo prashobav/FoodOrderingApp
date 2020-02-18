@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * RestaurantNotFoundException is thrown when restaurant asked by customer does not exist in the database.
- */
+ 
 public class RestaurantNotFoundException extends Exception {
     private final String code;
     private final String errorMessage;

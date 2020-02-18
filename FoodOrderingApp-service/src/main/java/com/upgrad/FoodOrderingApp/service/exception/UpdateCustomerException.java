@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * UpdateCustomerException is thrown when the customer details can't be updated found in the database.
- */
+ 
 public class UpdateCustomerException extends Exception {
     private final String code;
     private final String errorMessage;

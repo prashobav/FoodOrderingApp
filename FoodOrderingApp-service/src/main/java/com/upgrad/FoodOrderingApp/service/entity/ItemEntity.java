@@ -72,19 +72,5 @@ public class ItemEntity implements Serializable {
         this.price = price;
     }
 
-    /*public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }*/
-
-    /*public ItemList.ItemTypeEnum getType() {
-        return type;
-    }
-
-    public void setType(ItemList.ItemTypeEnum type) {
-        this.type = type;
-    }*/
+     
 }

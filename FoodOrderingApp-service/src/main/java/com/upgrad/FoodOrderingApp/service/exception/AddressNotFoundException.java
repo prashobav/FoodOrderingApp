@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * AddressNotFoundException is thrown when address id customer entered does not exist in the database.
- */
+ 
 public class AddressNotFoundException extends Exception {
     private final String code;
     private final String errorMessage;

@@ -13,17 +13,17 @@ public class CategoryBusinessService {
 	 @Autowired
 	    private CategoryDao categoryDao;
 
-	    // A Method which takes the categoryId as parameter for  getCategoryEntityById endpoint
+	     
 	    public CategoryEntity getCategoryEntityById(final Integer categoryId){
 	        return  categoryDao.getCategoryById(categoryId);
 	    }
 
-	    // A Method which takes the categoryUUId as parameter for  getCategoryEntityByUUId endpoint
+	     
 	    public CategoryEntity getCategoryEntityByUuid(final String categoryUUId){
 	        return  categoryDao.getCategoryByUUId(categoryUUId);
 	    }
 
-	    // A Method which is for  getAllCategories endpoint
+	     
 	    public List<CategoryEntity> getAllCategories(){
 	        return  categoryDao.getAllCategories();
 	    }

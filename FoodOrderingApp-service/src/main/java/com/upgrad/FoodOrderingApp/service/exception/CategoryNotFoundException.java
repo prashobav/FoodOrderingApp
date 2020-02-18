@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * CategoryNotFoundException is thrown when there are no category by the category uuid searched.
- */
+ 
 public class CategoryNotFoundException extends Exception {
     private final String code;
     private final String errorMessage;

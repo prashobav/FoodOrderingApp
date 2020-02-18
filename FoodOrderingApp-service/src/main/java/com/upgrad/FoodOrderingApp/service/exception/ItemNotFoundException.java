@@ -3,9 +3,7 @@ package com.upgrad.FoodOrderingApp.service.exception;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-/**
- * ItemNotFoundException is thrown when the item id searched in the database not exist in the database.
- */
+ 
 public class ItemNotFoundException extends Exception {
     private final String code;
     private final String errorMessage;
